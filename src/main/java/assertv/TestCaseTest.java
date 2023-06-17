@@ -1,11 +1,15 @@
 package main.java.assertv;
 
-public class TestCaseTest implements Test {
+public class TestCaseTest extends TestCase {
 
-    public static void main(String[] args) {
+    public TestCaseTest(String methodName) {
+        super(methodName);
     }
 
-    @Override
-    public void run() {
+    public void runTest() {
+        WasRun wasRun = new WasRun("setWasRunTrue");
+        Assertions.assertEquals(false, wasRun.wasRun);
+        wasRun.run();
+        Assertions.assertEquals(true, wasRun.wasRun);
     }
 }
