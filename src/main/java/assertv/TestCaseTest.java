@@ -15,23 +15,14 @@ public class TestCaseTest extends TestCase {
         wasRun = new WasRun("setWasRunTrue");
     }
 
-    public void runTest() {
-        Assertions.assertEquals(false, wasRun.wasRun);
+    public void runTemplateMethod() {
         wasRun.run();
-
-        List<MethodCall> methodCallLogs = wasRun.getMethodCallLogs();
-        Assertions.assertEquals(methodCallLogs.get(methodCallLogs.size() - 1), MethodCall.SET_WAS_RUN_TRUE);
-
-        Assertions.assertEquals(true, wasRun.wasRun);
+        validateMethodCallLogs();
     }
 
-    public void setUpTest() {
-        Assertions.assertEquals(false, wasRun.wasSetUp);
-        wasRun.run();
-
+    private void validateMethodCallLogs() {
         List<MethodCall> methodCallLogs = wasRun.getMethodCallLogs();
         Assertions.assertEquals(methodCallLogs.get(0), MethodCall.SET_UP);
-
-        Assertions.assertEquals(true, wasRun.wasSetUp);
+        Assertions.assertEquals(methodCallLogs.get(1), MethodCall.SET_WAS_RUN_TRUE);
     }
 }
