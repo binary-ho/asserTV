@@ -12,4 +12,11 @@ public class TestCaseTest extends TestCase {
         wasRun.run();
         Assertions.assertEquals(true, wasRun.wasRun);
     }
+
+    public void setUpTest() {
+        WasRun wasRun = new WasRun("setWasRunTrue");
+        Assertions.assertEquals(false, wasRun.wasSetUp);
+        wasRun.run();
+        Assertions.assertEquals(true, wasRun.wasSetUp);
+    }
 }
