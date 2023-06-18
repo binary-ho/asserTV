@@ -3,7 +3,7 @@ package main.java.assertv;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class TestCase {
+public abstract class TestCase {
 
     private final String methodName;
 
@@ -19,8 +19,11 @@ public class TestCase {
             method.invoke(this);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
+        } finally {
+            tearDown();
         }
     }
 
-    public void setUp() {}
+    abstract public void setUp();
+    abstract public void tearDown();
 }
