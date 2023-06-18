@@ -13,7 +13,7 @@ public abstract class TestCase {
 
     public TestResult run() {
         TestResult testResult = new TestResult();
-        testResult.increaseRunCount();
+        testResult.startTest();
 
         setUp();
 

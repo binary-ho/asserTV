@@ -25,14 +25,21 @@ public class TestCaseTest extends TestCase {
     }
 
     public void collectTestResult() {
-        TestResult result = wasRun.run();
-        Assertions.assertEquals("1 run, 0 failed", result.getSummary());
+        TestResult testResult = wasRun.run();
+        Assertions.assertEquals("test result : 1 run, 0 failed!", testResult.getSummary());
+    }
+
+    public void formatTestFailedResult() {
+        TestResult testResult = wasRun.run();
+        testResult.fail();
+
+        Assertions.assertEquals("test result : 1 run, 1 failed!", testResult.getSummary());
     }
 
     private void validateMethodCallLogs() {
         List<MethodCall> methodCallLogs = wasRun.getMethodCallLogs();
-        Assertions.assertEquals(methodCallLogs.get(0), MethodCall.SET_UP);
-        Assertions.assertEquals(methodCallLogs.get(1), MethodCall.SET_WAS_RUN_TRUE);
-        Assertions.assertEquals(methodCallLogs.get(2), MethodCall.TEAR_DOWN);
+        Assertions.assertEquals(MethodCall.SET_UP, methodCallLogs.get(0));
+        Assertions.assertEquals(MethodCall.SET_WAS_RUN_TRUE, methodCallLogs.get(1));
+        Assertions.assertEquals(MethodCall.TEAR_DOWN, methodCallLogs.get(2));
     }
 }
