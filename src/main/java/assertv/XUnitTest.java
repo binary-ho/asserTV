@@ -1,7 +1,5 @@
 package main.java.assertv;
 
-import main.java.assertv.assertions.Assertions;
-
 public class XUnitTest {
 
     private static final String[] METHODS = {
@@ -14,8 +12,17 @@ public class XUnitTest {
         addAllMethods(testSuite);
 
         TestResult testResult = new TestResult();
-        testSuite.run(testResult);
+        testSuite.test(testResult);
         System.out.println(testResult.getSummary());
+
+        TestSuite testSuite1 = new TestSuite();
+        testSuite1.add(new TestCaseTest("runTemplateMethod"));
+        testSuite1.add(testSuite);
+        testSuite1.add(testSuite);
+        testSuite1.add(testSuite);
+        TestResult testResult1 = new TestResult();
+        testSuite1.test(testResult1);
+        System.out.println(testResult1.getSummary());
     }
 
     private static void addAllMethods(TestSuite testSuite) {

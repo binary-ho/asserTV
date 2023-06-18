@@ -23,12 +23,12 @@ public class TestCaseTest extends TestCase {
 
     public void runTemplateMethod() {
         TestResult testResult = new TestResult();
-        wasRun.run(testResult);
+        wasRun.test(testResult);
     }
 
     public void collectTestResult() {
         TestResult testResult = new TestResult();
-        wasRun.run(testResult);
+        wasRun.test(testResult);
 
         Assertions.assertEquals(
             renderExpectedResultString(1, 0), testResult.getSummary()
@@ -48,7 +48,7 @@ public class TestCaseTest extends TestCase {
     public void testFailedResult() {
         wasRun = new WasRun("testBrokenMethod");
         TestResult testResult = new TestResult();
-        wasRun.run(testResult);
+        wasRun.test(testResult);
         Assertions.assertEquals(renderExpectedResultString(1, 1), testResult.getSummary());
 //        Assertions.assertThrow(AssertionError.class, () -> wasRun.run(new TestResult()));
     }
@@ -59,7 +59,7 @@ public class TestCaseTest extends TestCase {
         testSuite.add(new WasRun("testBrokenMethod"));
 
         TestResult testResult = new TestResult();
-        testSuite.run(testResult);
+        testSuite.test(testResult);
 
         Assertions.assertEquals(
             renderExpectedResultString(2, 1), testResult.getSummary()
