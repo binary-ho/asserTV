@@ -2,8 +2,10 @@
 
 ## 구현 목표
 - [X] 테스트 메서드 구현
+- [X] 값의 동일 여부를 확인하는 AssertEquals 메서드 구현
 - [X] before 구현
 - [X] after 구현
+- [X] 예외 발생을 테스트하는 AssertThrow 메서드 구현
 - [ ] 테스트 결과 수집
 
 ## Reference

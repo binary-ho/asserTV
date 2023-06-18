@@ -26,6 +26,10 @@ public class WasRun extends TestCase {
         methodCallLogs.add(MethodCall.SET_WAS_RUN_TRUE);
     }
 
+    public void testBrokenMethod() {
+        throw new AssertionError();
+    }
+
     public List<MethodCall> getMethodCallLogs() {
         return List.copyOf(methodCallLogs);
     }

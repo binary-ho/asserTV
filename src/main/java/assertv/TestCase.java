@@ -1,6 +1,5 @@
 package main.java.assertv;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public abstract class TestCase {
@@ -11,17 +10,21 @@ public abstract class TestCase {
         this.methodName = methodName;
     }
 
-    public void run() {
+    public TestResult run() {
+        TestResult testResult = new TestResult();
+        testResult.startTest();
+
         setUp();
 
         try {
             Method method = getClass().getMethod(methodName);
             method.invoke(this);
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            testResult.fail();
         } finally {
             tearDown();
         }
+        return testResult;
     }
 
     abstract public void setUp();
