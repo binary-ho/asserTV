@@ -17,6 +17,11 @@ public class WasRun extends TestCase {
         methodCallLogs.add(MethodCall.SET_UP);
     }
 
+    @Override
+    public void tearDown() {
+        methodCallLogs.add(MethodCall.TEAR_DOWN);
+    }
+
     public void setWasRunTrue() {
         methodCallLogs.add(MethodCall.SET_WAS_RUN_TRUE);
     }

@@ -3,7 +3,7 @@
 ## 구현 목표
 - [X] 테스트 메서드 구현
 - [X] before 구현
-- [ ] after 구현
+- [X] after 구현
 - [ ] 테스트 결과 수집
 
 ## Reference

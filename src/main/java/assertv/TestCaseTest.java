@@ -15,14 +15,19 @@ public class TestCaseTest extends TestCase {
         wasRun = new WasRun("setWasRunTrue");
     }
 
+    @Override
+    public void tearDown() {
+        validateMethodCallLogs();
+    }
+
     public void runTemplateMethod() {
         wasRun.run();
-        validateMethodCallLogs();
     }
 
     private void validateMethodCallLogs() {
         List<MethodCall> methodCallLogs = wasRun.getMethodCallLogs();
         Assertions.assertEquals(methodCallLogs.get(0), MethodCall.SET_UP);
         Assertions.assertEquals(methodCallLogs.get(1), MethodCall.SET_WAS_RUN_TRUE);
+        Assertions.assertEquals(methodCallLogs.get(2), MethodCall.TEAR_DOWN);
     }
 }
