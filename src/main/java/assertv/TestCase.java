@@ -2,7 +2,7 @@ package main.java.assertv;
 
 import java.lang.reflect.Method;
 
-public abstract class TestCase {
+public abstract class TestCase implements Testable {
 
     private final String methodName;
 
@@ -10,10 +10,8 @@ public abstract class TestCase {
         this.methodName = methodName;
     }
 
-    public TestResult run() {
-        TestResult testResult = new TestResult();
+    public void test(TestResult testResult) {
         testResult.startTest();
-
         setUp();
 
         try {
@@ -24,7 +22,6 @@ public abstract class TestCase {
         } finally {
             tearDown();
         }
-        return testResult;
     }
 
     abstract public void setUp();

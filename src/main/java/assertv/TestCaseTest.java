@@ -22,18 +22,22 @@ public class TestCaseTest extends TestCase {
     }
 
     public void runTemplateMethod() {
-        wasRun.run();
+        TestResult testResult = new TestResult();
+        wasRun.test(testResult);
     }
 
     public void collectTestResult() {
-        TestResult testResult = wasRun.run();
+        TestResult testResult = new TestResult();
+        wasRun.test(testResult);
+
         Assertions.assertEquals(
             renderExpectedResultString(1, 0), testResult.getSummary()
         );
     }
 
     public void formatTestFailedResult() {
-        TestResult testResult = wasRun.run();
+        TestResult testResult = new TestResult();
+        testResult.startTest();
         testResult.fail();
 
         Assertions.assertEquals(
@@ -43,13 +47,31 @@ public class TestCaseTest extends TestCase {
 
     public void testFailedResult() {
         wasRun = new WasRun("testBrokenMethod");
-        Assertions.assertThrow(AssertionError.class, () -> wasRun.run());
+        TestResult testResult = new TestResult();
+        wasRun.test(testResult);
+        Assertions.assertEquals(renderExpectedResultString(1, 1), testResult.getSummary());
+//        Assertions.assertThrow(AssertionError.class, () -> wasRun.run(new TestResult()));
+    }
+
+    public void testSuite() {
+        TestSuite testSuite = new TestSuite();
+        testSuite.add(new WasRun("setWasRunTrue"));
+        testSuite.add(new WasRun("testBrokenMethod"));
+
+        TestResult testResult = new TestResult();
+        testSuite.test(testResult);
+
+        Assertions.assertEquals(
+            renderExpectedResultString(2, 1), testResult.getSummary()
+        );
     }
 
     private void validateMethodCallLogs() {
         List<MethodCall> methodCallLogs = wasRun.getMethodCallLogs();
-        Assertions.assertEquals(MethodCall.SET_UP, methodCallLogs.get(0));
-        Assertions.assertEquals(MethodCall.TEAR_DOWN, methodCallLogs.get(methodCallLogs.size() - 1));
+        if (!methodCallLogs.isEmpty()) {
+            Assertions.assertEquals(MethodCall.SET_UP, methodCallLogs.get(0));
+            Assertions.assertEquals(MethodCall.TEAR_DOWN, methodCallLogs.get(methodCallLogs.size() - 1));
+        }
     }
 
     private String renderExpectedResultString(int runCount, int filedCount) {
