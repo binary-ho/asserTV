@@ -24,6 +24,11 @@ public class TestCaseTest extends TestCase {
         wasRun.run();
     }
 
+    public void collectTestResult() {
+        TestResult result = wasRun.run();
+        Assertions.assertEquals("1 run, 0 failed", result.getSummary());
+    }
+
     private void validateMethodCallLogs() {
         List<MethodCall> methodCallLogs = wasRun.getMethodCallLogs();
         Assertions.assertEquals(methodCallLogs.get(0), MethodCall.SET_UP);

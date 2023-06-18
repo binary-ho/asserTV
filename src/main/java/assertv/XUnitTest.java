@@ -3,7 +3,7 @@ package main.java.assertv;
 public class XUnitTest {
 
     private static final String[] METHODS = {
-        "runTemplateMethod"
+        "runTemplateMethod", "collectTestResult"
     };
 
     public static void main(String[] args) {
