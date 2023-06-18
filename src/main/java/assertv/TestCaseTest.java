@@ -1,6 +1,7 @@
 package main.java.assertv;
 
 import java.util.List;
+import main.java.assertv.assertions.Assertions;
 
 public class TestCaseTest extends TestCase {
 
