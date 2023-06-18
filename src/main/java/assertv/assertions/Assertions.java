@@ -1,6 +1,4 @@
-package main.java.assertv;
-
-import java.util.function.Supplier;
+package main.java.assertv.assertions;
 
 public class Assertions {
 
@@ -12,9 +10,9 @@ public class Assertions {
         }
     }
 
-    public static void assertThrow(Class<? extends Throwable> expected, Supplier<?> supplier) {
+    public static void assertThrow(Class<? extends Throwable> expected, ThrowingCallable callable) {
         try {
-            supplier.get();
+            callable.call();
         } catch (Throwable actualError) {
             if (expected.getClass().equals(actualError.getClass())) {
                 return;
