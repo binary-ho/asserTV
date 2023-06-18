@@ -4,6 +4,7 @@ public class Assertions {
 
     public static void assertEquals(Object expected, Object actual) {
         if (!expected.equals(actual)) {
+            System.out.println("expected <" + expected + "> but was <" + actual + ">");
             throw new AssertionError(
                 "expected <" + expected + "> but was <" + actual + ">"
             );
